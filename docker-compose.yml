@@ -49,4 +49,5 @@ networks:
   traefik-public:
     external: true
   monitoring-internal:
+    name: monitoring-internal
     driver: overlay
