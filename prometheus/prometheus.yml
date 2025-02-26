@@ -36,19 +36,19 @@ scrape_configs:
   #         - 'cabinet_cabinet:80'
   #         - 'cabinet_php-fpm:9000'
 
-  - job_name: 'feed-app'
-    static_configs:
-      - targets: ['feed-app_feed-app:80']
+  # - job_name: 'feed-app'
+  #   static_configs:
+  #     - targets: ['feed-app_feed-app:80']
 
   - job_name: 'feed-parser'
     static_configs:
       - targets:
-          - 'feed-parser-service_kremlin-indexer:80'
-          - 'feed-parser-service_mid-indexer:80'
-          - 'feed-parser-service_mil-indexer:80'
-          - 'feed-parser-service_rssfeed:80'
+          # - 'feed-parser-service_kremlin-indexer:80'
+          # - 'feed-parser-service_mid-indexer:80'
+          # - 'feed-parser-service_mil-indexer:80'
+          # - 'feed-parser-service_rssfeed:80'
           - 'feed-parser-service_server:8000'
-          - 'feed-parser-service_service:80'
+          # - 'feed-parser-service_service:80'
 
   # - job_name: 'common-library'
   #   static_configs:
@@ -76,4 +76,4 @@ scrape_configs:
 
   - job_name: 'traefik'
     static_configs:
-      - targets: ['traefik_traefik:8082']
+      - targets: ['traefik:8082']
