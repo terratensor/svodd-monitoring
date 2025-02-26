@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - traefik-network
+      - monitoring-internal
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.prometheus.rule=Host(`prometheus.svodd.ru`)
+        - traefik.http.routers.prometheus.entrypoints=https
+        - traefik.http.routers.prometheus.tls.certresolver=letsEncrypt
+        - traefik.http.services.prometheus.loadbalancer.server.port=9090
+      placement:
+        constraints:
+          - node.labels.worker == frontend-1
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    networks:
+      - traefik-network
+      - monitoring-internal
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.grafana.rule=Host(`grafana.svodd.ru`)
+        - traefik.http.routers.grafana.entrypoints=https
+        - traefik.http.routers.grafana.tls.certresolver=letsEncrypt
+        - traefik.http.services.grafana.loadbalancer.server.port=3000
+      placement:
+        constraints:
+          - node.labels.worker == frontend-1
+
+volumes:
+  grafana-storage:
+
+networks:
+  traefik-network:
+    external: true
+  monitoring-internal:
+    driver: overlay

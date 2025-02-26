@@ -1,0 +1,79 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'svodd-frontend'
+    static_configs:
+      - targets: ['svodd_frontend:80']
+
+  - job_name: 'svodd-backend'
+    static_configs:
+      - targets:
+          - 'svodd-server-service_service:80'
+          - 'svodd-server-service_parser:80'
+          - 'svodd_current-topic-parser:80'
+          - 'svodd_previous-topic-parser:80'
+          - 'svodd_questions-parser-1:80'
+          - 'svodd_questions-parser-2:80'
+          - 'svodd_questions-parser-3:80'
+          - 'svodd_questions-parser-4:80'
+
+  - job_name: 'svodd-database'
+    static_configs:
+      - targets:
+          - 'svodd_app-postgres:5432'
+          - 'svodd_manticore:9308'
+          - 'svodd_redis:6379'
+
+  - job_name: 'svodd-queue'
+    static_configs:
+      - targets: ['svodd-rabbitmq_rmq:15692']
+
+  - job_name: 'cabinet'
+    static_configs:
+      - targets:
+          - 'cabinet_cabinet:80'
+          - 'cabinet_php-fpm:9000'
+
+  - job_name: 'feed-app'
+    static_configs:
+      - targets: ['feed-app_feed-app:80']
+
+  - job_name: 'feed-parser'
+    static_configs:
+      - targets:
+          - 'feed-parser-service_kremlin-indexer:80'
+          - 'feed-parser-service_mid-indexer:80'
+          - 'feed-parser-service_mil-indexer:80'
+          - 'feed-parser-service_rssfeed:80'
+          - 'feed-parser-service_server:8000'
+          - 'feed-parser-service_service:80'
+
+  - job_name: 'common-library'
+    static_configs:
+      - targets:
+          - 'common-library_lib-manticore:9308'
+          - 'common-library_php:80'
+          - 'common-library_postgres:5432'
+
+  - job_name: 'kob-library'
+    static_configs:
+      - targets:
+          - 'kob-library_manticore:9308'
+          - 'kob-library_php:80'
+          - 'kob-library_postgres:5432'
+
+  - job_name: 'url-shortener'
+    static_configs:
+      - targets:
+          - 'url-shortener_url-shortener:8000'
+          - 'url-shortener_postgres:5432'
+
+  - job_name: 'tg-svodd-bot'
+    static_configs:
+      - targets: ['tg-svodd-bot_tg-svodd-bot:80']
+
+  - job_name: 'traefik'
+    static_configs:
+      - targets: ['traefik_traefik:8080']
