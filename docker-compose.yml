@@ -6,7 +6,7 @@ services:
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     networks:
-      - traefik-network
+      - traefik-public
       - monitoring-internal
     deploy:
       labels:
@@ -27,7 +27,7 @@ services:
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
     networks:
-      - traefik-network
+      - traefik-public
       - monitoring-internal
     deploy:
       labels:
