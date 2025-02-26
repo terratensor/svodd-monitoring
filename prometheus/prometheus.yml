@@ -40,7 +40,7 @@ scrape_configs:
   #   static_configs:
   #     - targets: ['feed-app_feed-app:80']
 
-  - job_name: 'feed-parser'
+  - job_name: 'feed-rss-server'
     static_configs:
       - targets:
           # - 'feed-parser-service_kremlin-indexer:80'
@@ -49,6 +49,9 @@ scrape_configs:
           # - 'feed-parser-service_rssfeed:80'
           - 'feed-parser-service_server:8000'
           # - 'feed-parser-service_service:80'
+  - job_name: 'feed-parser-service'
+    static_configs:
+      - targets: ['feed-parser-service_service:8080']  # Укажите IP и порт вашего сервиса
 
   # - job_name: 'common-library'
   #   static_configs:
