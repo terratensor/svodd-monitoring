@@ -20,11 +20,12 @@
 ## Установка
 
 1. Склонируйте репозиторий:
-   ```bash
-   git clone https://github.com/your-repo/svodd-monitoring.git
-   cd svodd-monitoring
-
-2/ Разверните стек в Docker Swarm:
+  
+```bash
+git clone https://github.com/terratensor/svodd-monitoring.git
+cd svodd-monitoring
+```
+2. Разверните стек в Docker Swarm:
 
 ```bash
 docker stack deploy -c docker-compose.yml svodd-monitoring
