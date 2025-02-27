@@ -3,8 +3,9 @@ version: "3.9"
 services:
   prometheus:
     image: prom/prometheus:latest
-    volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    configs:
+      - source: prometheus_config
+        target: /etc/prometheus/prometheus.yml
     networks:
       - traefik-public
       - monitoring-internal
@@ -24,7 +25,9 @@ services:
     image: grafana/grafana:latest
     volumes:
       - grafana-storage:/var/lib/grafana
-      - ./grafana/provisioning:/etc/grafana/provisioning
+    configs:
+      - source: grafana_provisioning
+        target: /etc/grafana/provisioning
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
     networks:
@@ -45,10 +48,16 @@ services:
 volumes:
   grafana-storage:
 
+configs:
+  prometheus_config:
+    file: ./prometheus/prometheus.yml
+  grafana_provisioning:
+    file: ./grafana/provisioning
+
 networks:
   traefik-public:
     external: true
   monitoring-internal:
     name: monitoring-internal
     external: true
-    driver: overlay    
+    driver: overlay
