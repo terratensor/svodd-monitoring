@@ -1,0 +1,5 @@
+# Dockerfile.alertmanager
+FROM prom/alertmanager:latest
+
+# Копируем конфигурационный файл
+COPY alertmanager.yml /etc/alertmanager/config.yml
