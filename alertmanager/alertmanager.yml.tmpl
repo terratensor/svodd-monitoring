@@ -2,9 +2,6 @@
 global:
   resolve_timeout: 5m
 
-template_files:
-  - "/etc/alertmanager/templates/*.tmpl"
-
 route:
   receiver: 'telegram'
   group_by: ['alertname', 'instance']
@@ -19,4 +16,4 @@ receivers:
         bot_token: '${TELEGRAM_BOT_TOKEN}'  # Переменная окружения
         chat_id: ${TELEGRAM_CHAT_ID}     # Переменная окружения
         send_resolved: true
-        message: '{{ template "telegram.message" . }}'
+        message: {{ template "telegram.message" . }}
