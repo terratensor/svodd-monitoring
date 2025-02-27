@@ -25,9 +25,7 @@ services:
     image: grafana/grafana:latest
     volumes:
       - grafana-storage:/var/lib/grafana
-    configs:
-      - source: grafana_provisioning
-        target: /etc/grafana/provisioning
+      - ./grafana/provisioning:/etc/grafana/provisioning  # Монтирование директории
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
     networks:
@@ -51,8 +49,6 @@ volumes:
 configs:
   prometheus_config:
     file: ./prometheus/prometheus.yml
-  grafana_provisioning:
-    file: ./grafana/provisioning
 
 networks:
   traefik-public:
