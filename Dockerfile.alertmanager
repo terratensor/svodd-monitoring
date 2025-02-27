@@ -1,5 +1,6 @@
 # Dockerfile.alertmanager
 FROM prom/alertmanager:latest
 
-# Копируем готовый конфигурационный файл
+# Копируем конфигурацию и шаблоны
 COPY ./alertmanager/alertmanager.yml /etc/alertmanager/alertmanager.yml
+COPY ./templates/ /etc/alertmanager/templates/
