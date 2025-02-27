@@ -2,7 +2,7 @@ groups:
   - name: host-alerts
     rules:
       - alert: HighCPUUsage
-        expr: (1 - avg(irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100 > 80
+        expr: (1 - avg(irate(node_cpu_seconds_total{mode="idle"}[5m]))) * 100 > 80
         for: 5m
         labels:
           severity: warning
@@ -27,3 +27,31 @@ groups:
         annotations:
           summary: "High disk usage on {{ $labels.instance }}"
           description: "Disk usage on {{ $labels.instance }} is above 80% for the last 10 minutes."
+  - name: service-alerts
+    rules:
+      - alert: FeedRSSServerDown
+        expr: up{job="feed-rss-server"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Feed RSS Server is down"
+          description: "The Feed RSS Server ({{ $labels.instance }}) has been down for more than 1 minute."
+
+      - alert: FeedParserServiceDown
+        expr: up{job="feed-parser-service"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Feed Parser Service is down"
+          description: "The Feed Parser Service ({{ $labels.instance }}) has been down for more than 1 minute."
+
+      - alert: TraefikDown
+        expr: up{job="traefik"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Traefik is down"
+          description: "Traefik ({{ $labels.instance }}) has been down for more than 1 minute."
