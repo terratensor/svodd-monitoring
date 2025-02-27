@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   prometheus:
-    image: ${{ env.REGISTRY }}/svodd-prometheus:${IMAGE_TAG}
+    image: ${REGISTRY}/svodd-prometheus:${IMAGE_TAG}
     networks:
       - traefik-public
       - monitoring-internal
@@ -19,7 +19,7 @@ services:
         constraints: [ node.labels.worker == monitoring ]
 
   grafana:
-    image: ${{ env.REGISTRY }}/svodd-grafana:${IMAGE_TAG}
+    image: ${REGISTRY}/svodd-grafana:${IMAGE_TAG}
     volumes:
       - grafana-storage:/var/lib/grafana
     environment:

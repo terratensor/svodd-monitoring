@@ -57,6 +57,8 @@ jobs:
 
       - name: Prepare docker-compose.yml
         run: |
+          export REGISTRY=${{ env.REGISTRY }}
+          export IMAGE_TAG=${{ env.IMAGE_TAG }}
           envsubst < docker-compose.yml > docker-compose-env.yml
           cat docker-compose-env.yml
 
