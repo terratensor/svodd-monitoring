@@ -50,4 +50,5 @@ networks:
     external: true
   monitoring-internal:
     name: monitoring-internal
-    driver: overlay
+    external: true
+    driver: overlay    
