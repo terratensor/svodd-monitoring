@@ -1,4 +1,4 @@
 FROM prom/prometheus:latest
 
-# Копируем файл конфигурации Prometheus
-COPY ./prometheus/prometheus.yml /etc/prometheus/prometheus.yml
+# Копируем всю папку с конфигурацией Prometheus
+COPY ./prometheus/ /etc/prometheus/
