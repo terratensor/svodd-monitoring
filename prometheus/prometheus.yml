@@ -22,3 +22,24 @@ scrape_configs:
           - 'tasks.node-exporter'
         type: 'A'
         port: 9100
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '10.0.3.27:9100'
+        replacement: 'debian11-2cpu-4ram'
+        target_label: instance
+      - source_labels: [__address__]
+        regex: '10.0.3.26:9100'
+        replacement: 'husky-zion'
+        target_label: instance
+      - source_labels: [__address__]
+        regex: '10.0.3.31:9100'
+        replacement: 'monitoring'
+        target_label: instance
+      - source_labels: [__address__]
+        regex: '10.0.3.30:9100'
+        replacement: 'svodd-frontend-1'
+        target_label: instance
+      - source_labels: [__address__]
+        regex: '10.0.3.29:9100'
+        replacement: 'svodd-worker-1'
+        target_label: instance
