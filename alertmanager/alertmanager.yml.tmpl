@@ -16,4 +16,19 @@ receivers:
         bot_token: '${TELEGRAM_BOT_TOKEN}'  # Переменная окружения
         chat_id: ${TELEGRAM_CHAT_ID}     # Переменная окружения
         send_resolved: true
-        message: "{{ template "telegram.message" . }}"
+        message: |
+          {{ if .Alerts.Firing }}
+          🔴 **Alert Firing**
+          {{ range .Alerts }}
+          - **Summary**: {{ .Annotations.summary }}
+          - **Description**: {{ .Annotations.description }}
+          - **Instance**: {{ .Labels.instance }}
+          {{ end }}
+          {{ else }}
+          ✅ **Alert Resolved**
+          {{ range .Alerts }}
+          - **Summary**: {{ .Annotations.summary }}
+          - **Description**: {{ .Annotations.description }}
+          - **Instance**: {{ .Labels.instance }}
+          {{ end }}
+          {{ end }}
