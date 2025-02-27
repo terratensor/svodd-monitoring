@@ -2,6 +2,9 @@
 global:
   resolve_timeout: 5m
 
+template_files:
+  - "/etc/alertmanager/templates/*.tmpl"
+
 route:
   receiver: 'telegram'
   group_by: ['alertname', 'instance']
