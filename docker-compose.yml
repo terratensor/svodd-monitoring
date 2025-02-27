@@ -39,6 +39,20 @@ services:
       placement:
         constraints: [ node.labels.worker == monitoring ]
 
+  node-exporter:
+    image: prom/node-exporter:latest
+    networks:
+      - monitoring-internal
+    deploy:
+      mode: global
+      placement:
+        constraints: [ node.platform.os == linux ]
+    ports:
+      - target: 9100
+        published: 9100
+        protocol: tcp
+        mode: host
+
 volumes:
   grafana-storage:
 
