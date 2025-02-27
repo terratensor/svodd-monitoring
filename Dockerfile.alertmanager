@@ -2,4 +2,4 @@
 FROM prom/alertmanager:latest
 
 # Копируем конфигурационный файл
-COPY alertmanager.yml /etc/alertmanager/config.yml
+COPY ./alertmanager/alertmanager.yml.tmpl /etc/alertmanager/config.yml
