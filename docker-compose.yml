@@ -2,10 +2,7 @@ version: "3.9"
 
 services:
   prometheus:
-    image: prom/prometheus:latest
-    configs:
-      - source: prometheus_config
-        target: /etc/prometheus/prometheus.yml
+    image: ${{ env.REGISTRY }}/svodd-prometheus:${IMAGE_TAG}
     networks:
       - traefik-public
       - monitoring-internal
@@ -22,10 +19,9 @@ services:
         constraints: [ node.labels.worker == monitoring ]
 
   grafana:
-    image: grafana/grafana:latest
+    image: ${{ env.REGISTRY }}/svodd-grafana:${IMAGE_TAG}
     volumes:
       - grafana-storage:/var/lib/grafana
-      - ./grafana/provisioning:/etc/grafana/provisioning  # Монтирование директории
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
     networks:
@@ -45,10 +41,6 @@ services:
 
 volumes:
   grafana-storage:
-
-configs:
-  prometheus_config:
-    file: ./prometheus/prometheus.yml
 
 networks:
   traefik-public:

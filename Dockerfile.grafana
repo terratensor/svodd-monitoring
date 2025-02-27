@@ -1,0 +1,7 @@
+FROM grafana/grafana:latest
+
+# Копируем файлы конфигурации Grafana
+COPY ./grafana/provisioning /etc/grafana/provisioning
+
+# Устанавливаем переменные окружения (опционально)
+ENV GF_SECURITY_ADMIN_PASSWORD=admin
