@@ -18,7 +18,7 @@ services:
         - traefik.http.routers.prometheus.tls=true
         - traefik.http.routers.prometheus.tls.certresolver=letsEncrypt
       placement:
-        constraints: [node.role == manager]
+        constraints: [ node.labels.worker == monitoring ]
 
   grafana:
     image: grafana/grafana:latest
@@ -40,7 +40,7 @@ services:
         - traefik.http.routers.grafana.tls=true
         - traefik.http.routers.grafana.tls.certresolver=letsEncrypt
       placement:
-        constraints: [node.role == manager]
+        constraints: [ node.labels.worker == monitoring ]
 
 volumes:
   grafana-storage:
