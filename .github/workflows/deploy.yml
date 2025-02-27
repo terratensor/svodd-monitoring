@@ -53,6 +53,7 @@ jobs:
           export TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
           export TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
           envsubst < alertmanager/alertmanager.yml.tmpl > alertmanager/alertmanager.yml
+          cat alertmanager/alertmanager.yml  # Для проверки вывода
           docker build -f Dockerfile.alertmanager -t ${{ env.REGISTRY }}/svodd-alertmanager:${{ env.IMAGE_TAG }} .
           docker push ${{ env.REGISTRY }}/svodd-alertmanager:${{ env.IMAGE_TAG }}
 
