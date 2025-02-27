@@ -16,19 +16,20 @@ receivers:
         bot_token: '${TELEGRAM_BOT_TOKEN}'  # Переменная окружения
         chat_id: ${TELEGRAM_CHAT_ID}     # Переменная окружения
         send_resolved: true
+        parse_mode: 'HTML'   
         message: |
           {{ if .Alerts.Firing }}
-          🔴 **Alert Firing**
+          🔴 <b>Alert Firing</b>
           {{ range .Alerts }}
-          - **Summary**: {{ .Annotations.summary }}
-          - **Description**: {{ .Annotations.description }}
-          - **Instance**: {{ .Labels.instance }}
+          - <b>Summary</b>: {{ .Annotations.summary }}
+          - <b>Description</b>: {{ .Annotations.description }}
+          - <b>Instance</b>: {{ .Labels.instance }}
           {{ end }}
           {{ else }}
-          ✅ **Alert Resolved**
+          ✅ <b>Alert Resolved</b>
           {{ range .Alerts }}
-          - **Summary**: {{ .Annotations.summary }}
-          - **Description**: {{ .Annotations.description }}
-          - **Instance**: {{ .Labels.instance }}
+          - <b>Summary</b>: {{ .Annotations.summary }}
+          - <b>Description</b>: {{ .Annotations.description }}
+          - <b>Instance</b>: {{ .Labels.instance }}
           {{ end }}
           {{ end }}
