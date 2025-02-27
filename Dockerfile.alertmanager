@@ -1,5 +1,8 @@
 # Dockerfile.alertmanager
 FROM prom/alertmanager:latest
 
+# Устанавливаем curl для диагностики
+RUN apk add --no-cache curl
+
 # Копируем готовый конфигурационный файл
 COPY ./alertmanager/alertmanager.yml /etc/alertmanager/config.yml
