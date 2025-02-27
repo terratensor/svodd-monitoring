@@ -43,6 +43,7 @@ services:
     image: ${REGISTRY}/svodd-alertmanager:${IMAGE_TAG}
     networks:
       - monitoring-internal
+      - traefik-public
     deploy:
       placement:
         constraints: [ node.labels.worker == monitoring ]
