@@ -51,3 +51,4 @@ scrape_configs:
         regex: '10.0.3.29:9100'
         replacement: 'svodd-worker-1'
         target_label: instance
+        
