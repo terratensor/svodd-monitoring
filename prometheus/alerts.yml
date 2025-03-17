@@ -27,6 +27,7 @@ groups:
         annotations:
           summary: "High disk usage on {{ $labels.instance }}"
           description: "Disk usage on {{ $labels.instance }} is above 80% for the last 10 minutes."
+
   - name: service-alerts
     rules:
       - alert: FeedRSSServerDown
@@ -55,3 +56,12 @@ groups:
         annotations:
           summary: "Traefik is down"
           description: "Traefik ({{ $labels.instance }}) has been down for more than 1 minute."
+
+      - alert: TgSvoddBotDown
+        expr: up{job="tg-svodd-bot"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Tg Svodd Bot is down"
+          description: "The Tg Svodd Bot ({{ $labels.instance }}) has been down for more than 1 minute."
