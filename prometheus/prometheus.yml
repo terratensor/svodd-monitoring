@@ -13,7 +13,7 @@ rule_files:
 scrape_configs:
   - job_name: 'tg_svodd_bot'
     static_configs:
-      - targets: ['tg-svodd-bot_tg-svodd-bot :8081']
+      - targets: ['tg-svodd-bot_tg-svodd-bot:8081']
 
   - job_name: 'feed-rss-server'
     static_configs:
